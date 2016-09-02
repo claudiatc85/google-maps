@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Google Map with a single marker and info window</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 75%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Google Map with a single marker and info window</h1>
+    <p>Example from Info Windows by Google Developers, with different coords</p>
+    
+    <div id="map"></div>
+    <script>
+
+      // This example displays a marker at a given position. When this marker is clicked, it loads an info window.
+
+      function initMap() {
+
+        var coords = {lat: 39.8898555, lng: 4.2671484};
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: coords
+        });
+
+        var contentString = '<div id="content">Info Window text</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        var marker = new google.maps.Marker({
+          position: coords,
+          map: map,
+          title: 'Google Maps Example'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+  </body>
+</html>
