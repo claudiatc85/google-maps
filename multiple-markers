@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 80%;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Google Map with multiple markers and info windows</h1>
+    <p>Example based on Google Developers Info Windows, adding a second marker</p>
+    <div id="map"></div>
+    <script>
+
+      // This example displays two marker at two given position.
+      // When the user clicks the markers, info windows open.
+
+      function initMap() {
+      
+      // Coords that will be used
+        var port = {lat: 39.8898555, lng: 4.2671484}; // coords for location 1
+        var esplanada = {lat: 39.8875208, lng: 4.2589854}; // coords for location 2
+        var center = {lat: 39.8886254, lng: 4.2632207}; // coords for map center
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: center
+        });
+
+        // Location 1 settings
+        var contentString1 = '<div id="content">Port de Maó</div>';
+
+        var infowindow1 = new google.maps.InfoWindow({
+          content: contentString1
+        });
+
+        var marker1 = new google.maps.Marker({
+          position: port,
+          map: map,
+          title: 'Port de Maó'
+        });
+        marker1.addListener('click', function() {
+          infowindow1.open(map, marker1);
+        });
+
+        //Location 2 settings        
+        var contentString2 = '<div id="content">Esplanda</div>';
+
+        var infowindow2 = new google.maps.InfoWindow({
+          content: contentString2
+        });
+
+        var marker2 = new google.maps.Marker({
+          position: esplanada,
+          map: map,
+          title: 'Esplanda'
+        });
+        marker2.addListener('click', function() {
+          infowindow2.open(map, marker2);
+        });
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+  </body>
+</html>
